@@ -1,11 +1,12 @@
-# common_cartridge
+# common_cartridge_parser
 A gem for the parsing of IMS Common Cartridge bundles.
 
-![alt tag](https://raw.github.com/instructure/common_cartridge/master/common_cartridge.png)
+It's a fork of the common_cartridge gem (https://github.com/instructure/common_cartridge).
+The main difference is that is adds support for XML namespaces and Basic LTI links resource.
 
 ## Usage
 
-common_cartridge transforms the XML contained in a Common Cartridge zip file into a nested object representation.
+common_cartridge_parser transforms the XML contained in a Common Cartridge zip file into a nested object representation.
 
 ``` ruby
 require 'common_cartridge'
@@ -37,7 +38,7 @@ xml = File.open('imsmanifest.xml').read
 CommonCartridge::Parser.parse(xml)
 ```
 
-You can configure common_cartridge as well.
+You can configure common_cartridge_parser as well.
 
 ``` ruby
 CommonCartridge.configure do |c|
