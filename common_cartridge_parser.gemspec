@@ -5,13 +5,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'common_cartridge/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'common_cartridge'
+  spec.name          = 'common_cartridge_parser'
   spec.version       = CommonCartridge::VERSION
   spec.authors       = ['Josh Simpson', 'Remy Obein']
   spec.email         = ['jsimpson@instructure.com', 'remy@cassia.tech']
-  spec.summary       = %q{CommonCartridge}
+  spec.summary       = %q{CommonCartridgeParser}
   spec.description   = 'Parse IMS Common Cartridge packages'
-  spec.homepage      = 'http://www.instructure.com/'
+  spec.homepage      = 'https://github.com/vhl/common_cartridge_parser/'
   spec.license       = 'MIT'
 
   spec.files         = Dir.glob("{lib,spec}/**/*")
