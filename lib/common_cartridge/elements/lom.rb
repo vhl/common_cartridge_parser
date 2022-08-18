@@ -70,7 +70,6 @@ module CommonCartridge
         include SAXMachine
 
         element 'lomimscc:general', as: :general, class: CommonCartridge::Elements::Lom::General
-        element :rights, class: CommonCartridge::Elements::Lom::Rights
       end
     end
   end

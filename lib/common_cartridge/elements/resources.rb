@@ -58,7 +58,6 @@ module CommonCartridge
 
         include SAXMachine
         attribute :href
-        element :attachments, class: Attachments::RootAttachment, as: :attachment_root
         elements :dependency, class: Dependency, as: :dependencies
 
         def attachments; attachment_root.attachments; end
