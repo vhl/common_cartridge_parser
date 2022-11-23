@@ -1,6 +1,7 @@
 module CommonCartridge
   module Elements
     module Organizations
+
       class Item
         attr_accessor :type
 

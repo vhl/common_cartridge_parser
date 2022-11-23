@@ -10,17 +10,16 @@ module CommonCartridge
   module Elements
     module Resources
 
-    def self.type_mappings
-      {
-       Topic.pattern => Topic,
-       WebLink.pattern =>  WebLink,
-       Assignment.pattern => Assignment,
-       Assessment.pattern => Assessment,
-       Page.pattern => Page,
-       BasicLtiLink::BasicLtiLink.pattern => BasicLtiLink::BasicLtiLink
-      }
-    end
-
+      def self.type_mappings
+        {
+          Topic.pattern => Topic,
+          WebLink.pattern => WebLink,
+          Assignment.pattern => Assignment,
+          Assessment.pattern => Assessment,
+          Page.pattern => Page,
+          BasicLtiLink::BasicLtiLink.pattern => BasicLtiLink::BasicLtiLink
+        }
+      end
 
       class Content
         include SAXMachine
@@ -61,7 +60,33 @@ module CommonCartridge
         element :attachments, class: Attachments::RootAttachment, as: :attachment_root
         elements :dependency, class: Dependency, as: :dependencies
 
-        def attachments; attachment_root.attachments; end
+        def attachments
+          attachment_root.attachments;
+        end
+      end
+
+      class EndUserRole
+        include SAXMachine
+
+        element 'lom:value', as: :role
+      end
+
+      class Educational
+        include SAXMachine
+
+        element 'lom:intendedEndUserRole', class: CommonCartridge::Elements::Resources::EndUserRole, as: :end_user_role
+      end
+
+      class Lom
+        include SAXMachine
+
+        element 'lom:educational', class: CommonCartridge::Elements::Resources::Educational, as: :educational
+      end
+
+      class Metadata
+        include SAXMachine
+
+        element 'lom:lom', class: CommonCartridge::Elements::Resources::Lom, as: :lom
       end
 
       class Resource
@@ -76,13 +101,17 @@ module CommonCartridge
 
         elements :file, class: File, as: :files
         elements :dependency, class: Dependency, as: :dependencies
+        element :metadata, class: CommonCartridge::Elements::Resources::Metadata, as: :metadata
 
+        def role
+          metadata&.lom&.educational&.end_user_role&.role
+        end
 
         # Switch statement based on 'type'
         def points_possible
           @points_possible ||= if dependency = dependencies.detect { |d| d.points_possible && !d.points_possible.empty? }
-            dependency.points_possible
-          end
+                                 dependency.points_possible
+                               end
         end
 
         def title
