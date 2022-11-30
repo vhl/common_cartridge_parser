@@ -8,6 +8,14 @@ module CommonCartridge
           element 'lticp:email', as: :email
         end
 
+        class Custom
+          include SAXMachine
+
+          element 'lticm:property', as: :type, with: {
+            name: "type"
+          }
+        end
+
         class Vendor
           include SAXMachine
 
@@ -48,6 +56,9 @@ module CommonCartridge
           element 'blti:description', as: :description
           element 'blti:secure_launch_url', as: :secure_launch_url
           element 'blti:launch_url', as: :launch_url
+          element 'blti:custom', class: Custom, as: :custom
+
+          element 'blti:icon', as: :icon
           element 'blti:vendor', class: Vendor, as: :vendor
 
           elements 'blti:extensions', class: Extension, as: :extensions
