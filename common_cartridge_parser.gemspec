@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'sax-machine', '~> 1.3.2'
-  spec.add_dependency 'nokogiri', '~> 1'
+  spec.add_dependency 'nokogiri', '~> 1.16.5'
   spec.add_dependency 'rubyzip', '~> 1.3.0'
 
   spec.add_development_dependency 'bundler'
